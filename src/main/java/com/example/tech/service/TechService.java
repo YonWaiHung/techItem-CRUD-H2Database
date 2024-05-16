@@ -16,8 +16,9 @@ public class TechService {
         return techItems;
     }
 
-    public List<Tech> findByTechTypeContaining(String techType) {
-        return techItems.stream().filter(tech -> tech.getTechType().contains(techType)).toList();
+//    Search function for tech name
+    public List<Tech> findByTechNameContaining(String techName) {
+        return techItems.stream().filter(tech -> tech.getTechName().contains(techName)).toList();
     }
 
     public Tech findById(long id) {

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/api")
 public class TechController {
@@ -21,14 +21,14 @@ public class TechController {
     TechRepository techRepository;
 
     @GetMapping("/techItems")
-    public ResponseEntity<List<Tech>> getAllTechItems(@RequestParam(required = false) String techType) {
+    public ResponseEntity<List<Tech>> searchWithTechName(@RequestParam(required = false) String techName) {
         try {
             List<Tech> techItems = new ArrayList<Tech>();
 
-            if (techType == null)
+            if (techName == null)
                 techRepository.findAll().forEach(techItems::add);
             else
-                techRepository.findByTechTypeContaining(techType).forEach(techItems::add);
+                techRepository.findByTechNameContaining(techName).forEach(techItems::add);
 
             if (techItems.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
